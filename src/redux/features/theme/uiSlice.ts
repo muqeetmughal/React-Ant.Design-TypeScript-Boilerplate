@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../../store";
 
 
 interface UiState {
@@ -10,10 +9,10 @@ interface UiState {
 }
 let state: UiState;
 
-let themeStringFromLS: string = String(localStorage.getItem("theme"))
+let themeStringFromLS : string | null = localStorage.getItem("theme")
 
 
-let themeObjectFromLS: UiState = JSON.parse(String(themeStringFromLS))
+let themeObjectFromLS : UiState = JSON.parse(String(themeStringFromLS))
 
 
 if (themeStringFromLS) {
@@ -33,8 +32,6 @@ const themeSlice = createSlice({
     initialState,
     reducers: {
         toggleSidebar: (state) => {
-
-
             localStorage.setItem("theme", JSON.stringify({
                 ...state,
                 sidebarCollapsed: !state.sidebarCollapsed

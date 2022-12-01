@@ -3,12 +3,17 @@ import { Button, Form, Input, Typography } from "antd";
 import { LockOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
+import { setLoginCredentials } from "../../redux/features/auth/authSlice";
 const LoginPage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
-  const onFinish = async () => { };
+  const onFinish = async (values:{}) => {
+    dispatch(setLoginCredentials(values))
+
+
+  };
   const onFinishFailed = async () => { };
   return (
     <>

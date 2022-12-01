@@ -1,21 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../../store";
-
 
 // const initiateLogin = createAsyncThunk("auth/login")
 
 interface AuthState {
-    user?: object,
+    user?: object | null,
     email?: string,
-    access?: string,
-    refresh?: string
+    access?: string | null,
+    refresh?: string | null
 }
 let initialState: AuthState;
 
 
-let authStringFromLS: string = String(localStorage.getItem("auth"))
+let authStringFromLS: string | null = localStorage.getItem("auth")
 
-console.log(authStringFromLS)
 
 let authObjectFromLS: AuthState = JSON.parse(String(authStringFromLS))
 
@@ -23,14 +20,15 @@ let authObjectFromLS: AuthState = JSON.parse(String(authStringFromLS))
 // const { access, refresh, user, email } = authObjectFromLS
 
 if (authStringFromLS) {
+    console.log("Chekc 1", authStringFromLS)
     initialState = authObjectFromLS
 } else {
-    initialState= {
-        user : {}
+    initialState = {
+        user: null
     }
 }
 
-console.log("initial state is : ", initialState)
+console.log("initial state in theme is : ", initialState)
 
 
 const authSlice = createSlice({
@@ -41,9 +39,10 @@ const authSlice = createSlice({
 
             // const { access, refresh } = action.payload
             state.user = action.payload
+            localStorage.setItem("auth", JSON.stringify({ user: action.payload }))
         },
         logOut: (state) => {
-            state.user = {}
+            state.user = null
             localStorage.removeItem("auth")
         }
     }
