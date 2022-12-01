@@ -1,12 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
-// ...
-
+import themeSlice from "./features/theme/uiSlice"
+import authSlice from './features/auth/authSlice'
 export const store = configureStore({
     reducer: {
-        // posts: postsReducer,
+        theme: themeSlice,
+        auth : authSlice
         // comments: commentsReducer,
         // users: usersReducer,
     },
+    // devTools: process.env.REACT_APP_DEBUG || true
+    // middleware: getDefaultMiddleware => getDefaultMiddleware(),
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
